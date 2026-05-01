@@ -1,0 +1,39 @@
+{
+  "name": "claudething",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "description": "Mirrors real-time Claude activity to the CarThing screen",
+  "author": "Neil Acquatella",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && npm run build-server && node scripts/package.js",
+    "build-server": "esbuild server/index.ts --bundle --platform=node --outfile=dist/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "deskthing-client": "^0.10.2",
+    "deskthing-server": "^0.10.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@types/ws": "^8.5.13",
+    "@vitejs/plugin-legacy": "^5.4.2",
+    "@vitejs/plugin-react": "^4.3.1",
+    "archiver": "^7.0.1",
+    "autoprefixer": "^10.4.19",
+    "esbuild": "^0.19.2",
+    "postcss": "^8.4.40",
+    "tailwindcss": "^3.4.10",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.1",
+    "vitest": "^2.0.0"
+  }
+}
