@@ -8,7 +8,7 @@
   "author": "Neil Acquatella",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && npm run build-server && node scripts/package.js",
+    "build": "vite build && npm run build-server && cp manifest.json dist/ && node scripts/package.js",
     "build-server": "esbuild server/index.ts --bundle --platform=node --outfile=dist/index.cjs",
     "test": "vitest run",
     "test:watch": "vitest",

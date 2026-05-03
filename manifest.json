@@ -1,0 +1,12 @@
+{
+  "type": ["server"],
+  "requires": [],
+  "label": "ClaudeThing",
+  "version": "0.1.0",
+  "description": "Mirrors real-time Claude activity to the CarThing screen",
+  "author": "Neil Acquatella",
+  "id": "claudething",
+  "isWebApp": true,
+  "isLocalApp": false,
+  "platforms": ["windows", "mac", "linux"]
+}
