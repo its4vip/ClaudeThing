@@ -3,13 +3,13 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
   "description": "Mirrors real-time Claude activity to the CarThing screen",
   "author": "Neil Acquatella",
   "scripts": {
     "dev": "vite",
     "build": "vite build && npm run build-server && node scripts/package.js",
-    "build-server": "esbuild server/index.ts --bundle --platform=node --outfile=dist/index.js",
+    "build-server": "esbuild server/index.ts --bundle --platform=node --outfile=dist/index.cjs",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint ."
