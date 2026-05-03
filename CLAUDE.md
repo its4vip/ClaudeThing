@@ -47,6 +47,25 @@ to the CarThing screen in real time. No spinner = Idle state.
 - All updates pushed via DeskThing's built-in message bus
 - Keep components small and focused
 
+## Hook Installation
+
+To enable Claude Code verb detection, add the following to `~/.claude/settings.json`:
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "<absolute-path>/hooks/send-verb.sh" }] }
+    ],
+    "Stop": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "<absolute-path>/hooks/clear-verb.sh" }] }
+    ]
+  }
+}
+```
+
+Replace `<absolute-path>` with the absolute path to this repo (e.g. `/Users/nacquatella/Documents/Claude/Projects/ClaudeThing`).
+
 ## Key References
 - DeskThing SDK: https://github.com/ItsRiprod/DeskThing
 - DeskThing Wiki: https://carthing.wiki
