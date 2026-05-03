@@ -21,5 +21,5 @@ VERB=$(node "$SCRIPT_DIR/map-verb.js" "$TOOL_NAME" 2>/dev/null || printf 'Thinki
 curl -sf --max-time 1 \
   -X POST http://localhost:7891/status \
   -H 'Content-Type: application/json' \
-  -d "{\"source\":\"code\",\"verb\":\"$VERB\"}" \
+  --data-raw "$(printf '{"source":"code","verb":"%s"}' "$VERB")" \
   >/dev/null 2>&1 || true

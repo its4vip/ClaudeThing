@@ -2,6 +2,7 @@ import { createWriteStream } from 'fs';
 import { join, resolve } from 'path';
 import archiver from 'archiver';
 import { readdir } from 'fs/promises';
+import { statSync } from 'fs';
 
 async function createPackage() {
     const packageName = process.env.npm_package_name;
@@ -17,10 +18,12 @@ async function createPackage() {
     archive.pipe(output);
     
     const files = await readdir(distPath);
-    
+
     for (const file of files) {
         if (file === `${packageName}-v${version}.zip`) continue;
-        archive.file(join(distPath, file), { name: file });
+        const filePath = join(distPath, file);
+        if (!statSync(filePath).isFile()) continue;
+        archive.file(filePath, { name: file });
     }
 
     await archive.finalize();

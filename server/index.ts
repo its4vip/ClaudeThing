@@ -7,6 +7,11 @@ import { createStateMap, updateSlot, getCurrentDisplay, Source } from './state.j
 
 const PORT = 7891
 const ROTATION_INTERVAL_MS = 3000
+const KNOWN_VERBS = new Set(['Thinking', 'Reading', 'Writing', 'Running', 'Fetching', 'Searching', 'Analyzing'])
+
+function isValidVerb(v: unknown): v is string {
+  return v === null || (typeof v === 'string' && KNOWN_VERBS.has(v))
+}
 
 let httpServer: ReturnType<typeof createServer> | null = null
 let wss: WebSocketServer | null = null
@@ -31,11 +36,14 @@ const start = async () => {
   httpServer = createServer((req: IncomingMessage, res: ServerResponse) => {
     if (req.method === 'POST' && req.url === '/status') {
       let body = ''
-      req.on('data', (chunk: Buffer) => { body += chunk.toString() })
+      req.on('data', (chunk: Buffer) => {
+        if (body.length > 1024) { res.writeHead(413).end(); return }
+        body += chunk.toString()
+      })
       req.on('end', () => {
         try {
           const { source, verb } = JSON.parse(body)
-          if (source === 'code') handleVerb('code', verb ?? null)
+          if (source === 'code' && isValidVerb(verb)) handleVerb('code', verb)
           res.writeHead(200).end('ok')
         } catch {
           res.writeHead(400).end('bad request')
@@ -52,8 +60,8 @@ const start = async () => {
     ws.on('message', (data: Buffer) => {
       try {
         const { source, verb } = JSON.parse(data.toString())
-        if (source === 'chat' || source === 'cowork') {
-          handleVerb(source as Source, verb ?? null)
+        if ((source === 'chat' || source === 'cowork') && isValidVerb(verb)) {
+          handleVerb(source as Source, verb)
         }
       } catch { /* ignore malformed messages */ }
     })
