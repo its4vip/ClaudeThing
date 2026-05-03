@@ -3,3 +3,34 @@
 @tailwind utilities;
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
+
+@keyframes pulse-ring {
+  0%, 100% { opacity: 0.25; transform: scale(1); }
+  50% { opacity: 0.65; transform: scale(1.06); }
+}
+
+@keyframes dot-bounce {
+  0%, 80%, 100% { opacity: 0.2; transform: scale(0.75); }
+  40% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes verb-in {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s ease-in-out infinite;
+}
+
+.animate-pulse-ring-delayed {
+  animation: pulse-ring 2s ease-in-out infinite 0.35s;
+}
+
+.animate-dot {
+  animation: dot-bounce 1.4s ease-in-out infinite;
+}
+
+.animate-verb-in {
+  animation: verb-in 0.25s ease-out both;
+}
