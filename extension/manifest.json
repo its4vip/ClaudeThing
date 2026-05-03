@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "ClaudeThing",
+  "version": "0.1.0",
+  "description": "Sends Claude spinner verbs to the ClaudeThing DeskThing plugin",
+  "content_scripts": [
+    {
+      "matches": ["https://claude.ai/*", "https://cowork.claude.ai/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
